@@ -18,7 +18,12 @@ const getFinalGiftBySession = async (req, res, next) => {
     });
 
     if (!user) {
-      return res.status(404).json({ success: false, message: 'Session not found.' });
+      return res.json({
+        success: true,
+        hasFinalGift: false,
+        finalGift: null,
+        results: []
+      });
     }
 
     const spins = await prisma.spin.findMany({
