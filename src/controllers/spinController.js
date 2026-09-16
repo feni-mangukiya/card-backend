@@ -97,12 +97,8 @@ const getSpinsBySession = async (req, res, next) => {
     });
 
     if (!user) {
-      return res.json({
-        success: true,
-        totalSpins: 0,
-        remainingSpins: 2,
-        results: []
-      });
+      await getOrCreateVisitor(normalizedSessionId);
+      return res.json({ success: true, totalSpins: 0, remainingSpins: 2, results: [] });
     }
 
     const summary = await getSpinSummary(user.id);
