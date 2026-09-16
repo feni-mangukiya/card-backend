@@ -35,6 +35,13 @@ app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 app.use(express.json({ limit: '1mb' }));
 
+app.get('/api/health', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Backend is running'
+  })
+})
+
 app.use('/api', routes);
 
 app.use(notFound);
